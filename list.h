@@ -8,7 +8,7 @@ struct poly
     int coef;
     int degree;
     struct poly* next;
-};
+}; //инициализация структурного типа многочлена
 
 struct poly* inithead(int _coef, int _degree)
 {
@@ -17,5 +17,6 @@ struct poly* inithead(int _coef, int _degree)
     element->coef = _coef;
     element->next = NULL;
     return element;
-}
+}   //инициализация конца списка
+
 #endif //XWORK10_LIST_H
