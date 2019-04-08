@@ -13,7 +13,7 @@ int addelem(struct poly* _head, int _coef, int _degree)
     _head->next = NULL;
 
     return 0;
-}
+}//добваление элемента в список
 
 struct poly* findelem(struct poly* _head, int _index)   //indexing
 {
@@ -30,7 +30,7 @@ struct poly* findelem(struct poly* _head, int _index)   //indexing
     if (_index != index) return NULL;
 
     return _head;
-}
+}//поиск элемента с определнным индексом в списке
 
 void output(int size, int tmp, struct poly* OnlyOne)
 {
@@ -49,7 +49,7 @@ void output(int size, int tmp, struct poly* OnlyOne)
                 exit(0);
             }
         }
-    }
+    }//проверка на одинаковые степени
 
     for (int i = 1; i <= size; ++i)
     {
@@ -80,11 +80,22 @@ void output(int size, int tmp, struct poly* OnlyOne)
             } else
             printf("%dx^%d ", findelem(OnlyOne, i)->coef, findelem(OnlyOne, i)->degree);
         }
-    }
+    }//вывод списка в читаемом виде ( с "+", "-" и пробелами )
 }
+
+void _free(struct poly* next) {
+    struct poly* OnlyOne;
+    while (next != NULL) {
+        OnlyOne = next;
+        next = next->next;
+        free(OnlyOne);
+    }
+}//освобождение памяти, выделенной под список
 
 int main()
 {
+    //инициализация
+
     struct poly* first = inithead(0, 0);
     struct poly* second = inithead(0, 0);
     struct poly* final = inithead(0, 0);
@@ -101,7 +112,7 @@ int main()
     {
         printf("Input error! Try again.\t");
         while(getchar()!='\n');
-    }
+    }//проверка
 
     for (int i = 1; i <= size1; ++i)
     {
@@ -111,7 +122,7 @@ int main()
         {
             printf("Input error! Try again.\t");
             while(getchar()!='\n');
-        }
+        }//проверка
 
         if (CurrentDegree != 0)
         {
@@ -129,7 +140,7 @@ int main()
         {
             printf("Input error! Try again.\t");
             while(getchar()!='\n');
-        }
+        }//проверка
 
         printf("\n");
 
@@ -152,7 +163,7 @@ int main()
     {
         printf("Input error! Try again.\t");
         while(getchar()!='\n');
-    }
+    }//проверка
 
     for (int i = 1; i <= size2; ++i)
     {
@@ -162,7 +173,7 @@ int main()
         {
             printf("Input error! Try again.\t");
             while(getchar()!='\n');
-        }
+        }//проверка
 
         if (CurrentDegree == 0)
         {
@@ -175,7 +186,7 @@ int main()
         {
             printf("Input error! Try again.\t");
             while(getchar()!='\n');
-        }
+        }//проверка
 
         printf("\n");
 
@@ -197,8 +208,11 @@ int main()
     printf("\nThe final polynomial...");
     sleep(2);
     output(FinalSize, numberID, final);
-    printf("\n-----------------------------------------\nPress \"F\"\n");
+    printf("\n-----------------------------------------\nPress \"F\"\n");   //to pay respect
 
     getchar();
-    return 0;
+
+    _free(first);
+    _free(second);
+    _free(final);
 }
